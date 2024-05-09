@@ -572,9 +572,6 @@ print(add_binary("1100101","100101011"))
 
 
 def climb_stairs( n):
-    if n <= 1:
-        return 1
-        
     dp = [0] * (n + 1)
     dp[0] = 1
     dp[1] = 1  
@@ -585,3 +582,140 @@ def climb_stairs( n):
     return dp[n]
 
 print(climb_stairs(4))
+
+def pascal_triangle(num_rows):
+    triangle = [[1]]
+    for i in range(1, num_rows):
+        new_row = [0] * (i + 1)
+        new_row[0] = 1
+        new_row[-1] = 1
+        
+        for j in range(1, len(new_row) - 1):
+            new_row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
+        
+        triangle.append(new_row)
+    
+    return triangle
+
+print(pascal_triangle(5))  
+
+
+'''
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy
+ one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+'''
+
+def max_profit(prices):
+    profit = 0
+    for i in range(len(prices)):
+        for j in range(len(prices)):
+            if i != j and j > i:
+                if prices[j] - prices[i] > profit:
+                    profit = prices[j] - prices[i]
+    return profit
+
+print(max_profit([7,1,5,3,6,4]))
+
+# Do this in less than O(n2)
+
+def max_profit_2(prices):
+    min_price = prices[0]
+    max_profit = 0
+    
+    for price in prices:
+        min_price = min(min_price, price)
+        max_profit = max(max_profit, price - min_price)
+    
+    return max_profit
+
+print(max_profit_2([7,1,5,3,6,4]))
+
+'''
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+'''
+
+def single_number(numbers):
+    result = 0
+    for number in numbers:
+        result ^= number
+    return result
+    
+print(single_number([2,2,1,3,3]))
+
+'''
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. 
+You may assume that the majority element always exists in the array.
+'''
+
+def majority_element(nums):
+    nums.sort()
+    nums_len = len(nums)
+    return nums[nums_len//2]
+
+
+
+print("El numero que mas se repite es " + str(majority_element([2,2,1,1,1,2,2])))
+
+#Could you solve the problem in linear time and in O(1) space?
+# Moore Voting solution
+
+def majority_element_2(nums):
+    candidate = 0
+    count = 0
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+            count = 1
+        elif num == candidate:
+            count += 1
+        else:
+            count -= 1
+
+    return candidate
+
+print("El numero que mas se repite es " + str(majority_element_2([3,2,3])))
+print("El numero que mas se repite es " + str(majority_element_2([2,2,1,1,1,2,2])))
+
+'''
+Write an algorithm to determine if a number n is happy.
+
+A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), 
+or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.
+Return true if n is a happy number, and false if not.
+'''
+
+def happy_number(number):
+    string_number = str(number)
+    next_number = 0
+    visited = set()
+    while True:
+        for digit in string_number:
+            current_digit = int(digit)
+            next_number = next_number + current_digit**2
+        
+        if next_number == 1:
+            return True
+        
+        if next_number in visited:
+            return False
+        
+        string_number = str(next_number)
+        visited.add(next_number)
+        next_number = 0
+    
+
+print(happy_number(19))
+print(happy_number(2))
