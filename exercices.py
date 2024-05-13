@@ -756,3 +756,39 @@ def average_value(nums):
 print(average_value([1,3,6,10,12,15]))
 print(average_value([1,2,4,7,10]))
     
+'''
+Given an array of integers nums, return the number of good pairs.
+
+A pair (i, j) is called good if nums[i] == nums[j] and i < j.
+
+'''
+def good_pairs(nums):
+    len_nums = len(nums)
+    count = 0
+    for i in range(len_nums):
+        for j in range(len_nums):
+            if i < j and nums[i] == nums[j]:
+                count += 1
+
+    return count
+
+print(good_pairs([1,2,3,1,1,3]))
+print(good_pairs([1,1,1,1]))
+print(good_pairs([1,2,3]))
+
+# Now with a time complexity less than O (n2)
+def numIdenticalPairs(nums):
+        num_count = {}
+        count = 0
+        for num in nums:
+            if num in num_count:
+                count += num_count[num]
+                num_count[num] += 1
+            else:
+                num_count[num] = 1
+        return count
+
+print("Num identical Pairs with a time complexity less than O (n2)")
+print(numIdenticalPairs([1,2,3,1,1,3]))  
+print(numIdenticalPairs([1,1,1,1]))      
+print(numIdenticalPairs([1,2,3]))
