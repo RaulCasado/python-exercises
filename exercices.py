@@ -720,42 +720,4 @@ def happy_number(number):
 print(happy_number(19))
 print(happy_number(2))
 
-
-'''
-Given two arrays of unique digits nums1 and nums2, 
-return the smallest number that contains at least one digit from each array.
-'''
-
-def smallest_number(nums_1, nums_2):
-    smallest = float('inf')
-    for num1 in nums_1:
-        for num2 in nums_2:
-            combined = int(str(num1) + str(num2))
-            smallest = min(smallest, combined)  
-    return smallest
-
-nums_1, nums_2 = [4,1,3], [5,7]
-print(smallest_number(nums_1, nums_2)) 
-
-nums_1, nums_2 = [3,5,2,6], [3,1,7]
-print(smallest_number(nums_1, nums_2))  
-
-
-'''
-Given an integer array nums of positive integers, return the average value of all even integers that are divisible by 3.
-
-Note that the average of n elements is the sum of the n elements divided by n and rounded down to the nearest integer.
-'''
-
-def average_value(nums):
-    sum = 0
-    for num in nums:
-        if num%6 == 0:
-            sum += num
-    return int(sum/2)
-
-print(average_value([1,3,6,10,12,15]))
-print(average_value([1,2,4,7,10]))
-        
-
     
