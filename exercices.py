@@ -792,3 +792,32 @@ print("Num identical Pairs with a time complexity less than O (n2)")
 print(numIdenticalPairs([1,2,3,1,1,3]))  
 print(numIdenticalPairs([1,1,1,1]))      
 print(numIdenticalPairs([1,2,3]))
+
+'''
+On a 2D plane, there are n points with integer coordinates points[i] = [xi, yi]. Return the minimum time in seconds 
+to visit all the points in the order given by points.
+
+You can move according to these rules:
+
+In 1 second, you can either:
+move vertically by one unit,
+move horizontally by one unit, or
+move diagonally sqrt(2) units (in other words, move one unit vertically then one unit horizontally in 1 second).
+You have to visit the points in the same order as they appear in the array.
+You are allowed to pass through points that appear later in the order, but these do not count as visits.
+'''
+def min_time_to_visit_all_points(points):
+        total_time = 0
+        
+        for i in range(len(points) - 1):
+            x1, y1 = points[i]
+            x2, y2 = points[i+1]
+            
+            distance = max(abs(x2 - x1), abs(y2 - y1))
+        
+            total_time += distance
+        
+        return total_time
+
+print(min_time_to_visit_all_points([[1,1],[3,4],[-1,0]]))
+print(min_time_to_visit_all_points([[3,2],[-2,2]]))
