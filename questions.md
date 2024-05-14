@@ -202,3 +202,28 @@ print(result)  # Saldría [6,8,10,12]
 
 5. **Paralelización y concurrencia:** Utilizar técnicas de paralelización y concurrencia puede mejorar el rendimiento del código al aprovechar múltiples núcleos de CPU o realizar operaciones de manera simultánea. Módulos como multiprocessing y threading proporcionan funcionalidades para implementar estas técnicas en Python.
 
+# ¿Qué significa que un lenguaje sea interpretado o compilado?
+
+Un lenguaje compilado es aquel lenguaje que se pasa a lenguaje máquina una vez se va a iniciar y ya una vez compilado se ejecutará normalmente. Por otro lado, un lenguaje interpretado se ejecuta línea por línea, con cada línea traducida y ejecutada en tiempo real.
+
+Las ventajas y desventajas de estos lenguajes empecemos con las ventajas de los compilados:
+
+1. En tiempo de ejecución son más rápidos ya que se han traducido a un lenguaje cercano a la máquina por eso por ejemplo en Python en partes en las que se necesita más velocidad hay un módulo que convierte la parte del código en C++ o C. Otra opción sería escribir las partes donde necesitemos más rapidez en los lenguajes ya mencionados como C o C++.
+
+2. Portabilidad: Una vez que un programa se ha compilado para una plataforma específica, puede ejecutarse en esa plataforma sin necesidad de instalar un entorno de tiempo de ejecución adicional, lo que puede simplificar la distribución y la instalación del software.
+
+3. Detección de errores: lo más común en estos casos sería los errores de sintaxis ya que antes de ejecutarse se compila se puede detectar estos errores con mayor facilidad. Esto puede hacer que podamos ver el fallo antes de siquiera ejecutarlo.
+
+4. Optimización: Los compiladores serán los encargados de hacer que nuestro código sea menos pesado y más rápido. Ya que comprimen todo al máximo para que haya el menor número de caracteres como espacios, tabulaciones, etc.
+
+5. En general, los programas compilados tienden a ser más seguros en términos de protección contra acceso no autorizado al código fuente. Esto se debe a que el código fuente original se compila en código máquina binario, que es más difícil de leer y comprender.
+
+Ahora el lado negativo:
+
+1. El proceso de compilación puede llevar tiempo, especialmente para programas grandes o complejos. Este tiempo adicional de compilación puede ser inconveniente a la hora de probar cambios rápidos. Aunque hay métodos para facilitar al compilador este trabajo como por ejemplo la caché.
+
+2. Una vez que un programa se ha compilado, es difícil realizar cambios en el código sin volver a compilarlo por completo. Esto puede ser problemático si se necesita realizar ajustes o correcciones rápidas en el software en producción, ya que cualquier cambio requiere volver a compilar y volver a implementar el programa.
+
+3. Errores menos precisos: los interpretados al tener que interpretar el código línea por línea pueden llegar a dar mensajes de error más precisos que nos pueden facilitar a la hora de arreglar algún problema en la app.
+
+Algunos ejemplos de lenguajes interpretados son JS y Python y compilados C, C++, Rust, Go.
