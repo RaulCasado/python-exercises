@@ -1,4 +1,6 @@
+from collections import Counter
 import random
+import re
 # prime numbers
 def is_prime(number_to_check):
     if number_to_check <= 1:
@@ -839,3 +841,27 @@ def k_length_apart(nums, k):
     return True
 
 print(k_length_apart([1,0,0,0,1,0,0,1], 2))  
+
+
+'''
+Given a string paragraph and a string array of the banned words banned, return the most frequent word that 
+is not banned. It is guaranteed there is at least one word that is not banned, and that the answer is unique.
+
+The words in paragraph are case-insensitive and the answer should be returned in lowercase.
+'''
+def most_common_word(paragraph, banned):
+        paragraph = re.sub(r'[^\w\s]', ' ', paragraph.lower())
+        
+        words = paragraph.split()
+        
+        word_count = Counter()
+        for word in words:
+            if word not in banned:
+                word_count[word] += 1
+
+        
+        most_common_word = max(word_count, key=word_count.get)
+        
+        return most_common_word
+
+print(most_common_word("Bob hit a ball, the hit BALL flew far after it was hit.",["hit"]))
