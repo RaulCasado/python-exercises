@@ -821,3 +821,21 @@ def min_time_to_visit_all_points(points):
 
 print(min_time_to_visit_all_points([[1,1],[3,4],[-1,0]]))
 print(min_time_to_visit_all_points([[3,2],[-2,2]]))
+
+'''
+Given an binary array nums and an integer k, return true if all 1's are at least k places away from each other, 
+otherwise return false.
+'''
+
+def k_length_apart(nums, k):
+    last_one_position = -float("inf")
+    
+    for i in range(len(nums)):
+        if nums[i] == 1:
+            if i - last_one_position <= k:
+                return False
+            last_one_position = i
+    
+    return True
+
+print(k_length_apart([1,0,0,0,1,0,0,1], 2))  
