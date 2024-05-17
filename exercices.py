@@ -940,5 +940,51 @@ def minimum_recolors(blocks,k):
 print(minimum_recolors(blocks = "WBBWWBBWBW", k = 7))
 print(minimum_recolors(blocks = "WBWBBBW", k = 2))
 
+'''
+Given a string s, find the length of the longest 
+substring without repeating characters.
+'''
+
+def length_longest_substring(word):
+    combinations = []
+
+    temporal_combination = []
+    for letter in word:
+        if letter in temporal_combination:
+            combinations.append(temporal_combination)
+            temporal_combination = []
+        else:
+            temporal_combination.append(letter)
+
+    if temporal_combination:
+        combinations.append(temporal_combination)
+    
+    longest_combo = 0
+    for combination in combinations:
+        longest_combo = max(longest_combo,len(combination))
+    
+    return longest_combo
+    
+print(length_longest_substring("abcabcbb"))
+print(length_longest_substring("bbbbb"))
+print(length_longest_substring("pwwkew"))
 
 
+# using window slide
+def lengthOfLongestSubstring(s):
+    char_index = {}
+    max_length = 0
+    left = 0
+    
+    for right, char in enumerate(s):
+        if char in char_index and char_index[char] >= left:
+            left = char_index[char] + 1
+        
+        char_index[char] = right
+        max_length = max(max_length, right - left + 1)
+    
+    return max_length
+
+print(lengthOfLongestSubstring("abcabcbb"))
+print(lengthOfLongestSubstring("bbbbb"))
+print(lengthOfLongestSubstring("pwwkew"))
