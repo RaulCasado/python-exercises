@@ -1,6 +1,7 @@
 from collections import Counter
 import random
 import re
+import math
 # prime numbers
 def is_prime(number_to_check):
     if number_to_check <= 1:
@@ -892,3 +893,52 @@ def minimum_boxes(apple, capacity):
     return boxes_used
 
 print(minimum_boxes(apple=[1, 3, 2], capacity=[4, 3, 1, 5, 2]))
+
+'''
+You are given an integer array gifts denoting the number of gifts in various piles. 
+Every second, you do the following:
+
+Choose the pile with the maximum number of gifts.
+If there is more than one pile with the maximum number of gifts, choose any.
+Leave behind the floor of the square root of the number of gifts in the pile. Take the rest of the gifts.
+Return the number of gifts remaining after k seconds.
+'''
+
+def pick_gifts(gifts,time):
+    i = 0
+    while time > i:
+        max_number = max(gifts)
+        index = gifts.index(max_number)
+        floor_sqrt = math.floor(math.sqrt(max_number))
+        gifts[index] = floor_sqrt
+        i += 1
+    return sum(gifts)
+
+print(pick_gifts([25,64,9,4,100], 4))
+print(pick_gifts([1,1,1,1],4))
+
+'''You are given a 0-indexed string blocks of length n, where blocks[i] is either 'W' or 'B',
+ representing the color of the ith block. The characters 'W' and 'B' denote the colors white and black, respectively.
+
+You are also given an integer k, which is the desired number of consecutive black blocks.
+
+In one operation, you can recolor a white block such that it becomes a black block.
+
+Return the minimum number of operations needed such that there is at least one occurrence 
+of k consecutive black blocks.'''
+
+def minimum_recolors(blocks,k):
+    block_length = len(blocks)
+    minimum_w = float("inf")
+    for i in range(block_length - k + 1):
+        block_to_check = blocks[i:i+k]
+        white_count = block_to_check.count("W")
+        minimum_w = min(minimum_w,white_count)
+    
+    return minimum_w
+
+print(minimum_recolors(blocks = "WBBWWBBWBW", k = 7))
+print(minimum_recolors(blocks = "WBWBBBW", k = 2))
+
+
+
