@@ -227,3 +227,123 @@ Ahora el lado negativo:
 3. Errores menos precisos: los interpretados al tener que interpretar el código línea por línea pueden llegar a dar mensajes de error más precisos que nos pueden facilitar a la hora de arreglar algún problema en la app.
 
 Algunos ejemplos de lenguajes interpretados son JS y Python y compilados C, C++, Rust, Go.
+
+# Qué son los decoradores en Python
+
+Los decoradores son funciones que toman una función como parámetro y devuelven una función modificada.
+Por ejemplo podemos añadir una nueva funcionalidad o lógica a una función sin tener que modificar el código base.
+
+```python
+import time
+
+def tiempo_ejecucion(funcion):
+    def wrapper(*args, **kwargs):
+        inicio = time.time()
+        resultado = funcion(*args, **kwargs)
+        fin = time.time()
+        print(f"La función {funcion.__name__} tardó {fin - inicio} segundos en ejecutarse")
+        return resultado
+    return wrapper
+
+@tiempo_ejecucion
+def suma(a, b):
+    return a + b
+
+print(suma(3, 5))
+```
+
+Tenemos una función suma que suma dos números. Pero como tiene un decorador realmente está añadiendo o cambiando su funcionalidad así que veamos que tiene el decorador.
+
+Este decorador como hemos visto en la definición toma por parámetros una función en este caso suma dentro del decorador vamos a declarar la función con los cambios que queramos en nuestro caso será medir el tiempo que se tarda en sumar estos 2 números con la función time.
+
+También tenemos *args que sirve para cuando no sabes el número de arguementos que va a tomar la función por eso lo ponemos recogiendose en args como una tupla, a parte tenemos **kwargs que tiene la misma funcionalidad pero con parámetros de palabra clave es decir este tipo de argumentos nombre="Juan", edad=30 recogiendose como un diccionario.
+
+Poniendo *args y **kwargs hacemos que el decorador sea más universal ya que podríamos aplicarselo a una función que tomase 3 parámetros en vez de 2. Una vez ejecutada la función va a imprimir el tiempo que tardó y retonar el resultado de la suma. Finalmente se va a retonar esta  función wrapper para ser usada con el decorador.
+
+# Qué es un Arból Binario
+
+Un árbol binario es una estructura de datos jerárquica en la que cada nodo tiene como máximo dos hijos izquierdo y derecho.Estos nodos secundarios, a su vez, pueden ser nodos internos con sus propios hijos o pueden ser nodos terminales, también conocidos como hojas.
+
+Si queremos implementar esta estructura de datos podemos usar librerias como binarytree o podemos implementarlo con código implementado por nosotros esto puede tener varias ventajas como implementar sólo las funcionalidades que sean necesarias y mantener más ligero el proyecto ya que al instalar dependencias de terceros podemos instalar dependencias que se necesiten para hacer funcionar la que hemos instalado aumentando así el tamaño del proyecto. Pero también tiene desventjas la más clara es que se va a tener que gastar tiempo de desarrollo recreando la estructura. Así que vamos a ver un ejemplo de implementación en Python.
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    def __init__(self, root=None):
+        self.root = root
+    
+    def display_tree(self, node, level=0):
+        if node is not None:
+            print(' ' * 4 * level + '->', node.value)
+            self.display_tree(node.left, level + 1)
+            self.display_tree(node.right, level + 1)
+
+# Crearemos algunos nodos para probar que todo funcione correctamente
+node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node4 = Node(4)
+node5 = Node(5)
+
+# Build the tree
+node1.left = node2
+node1.right = node3
+node2.left = node4
+node2.right = node5
+
+# Create the binary tree
+tree = BinaryTree(node1)
+
+# Display the tree
+tree.display_tree(tree.root)
+```
+
+Esta sería el código base de como implementar un árbol binario en Python hay que tener en cuenta que depende de las necesidades del programa podemos añadir más o menos métodos. Por ejemplo podemos tener métodos para añadir un nodo, para recorrer el arbol como inorder, preorder y postorder. Aquí tenemos un ejemplo en código.
+
+```python
+    def traverse_preorder(node, visit):
+        if node:
+            visit(node.value)
+            self.traverse_preorder(node.left, visit)
+            self.traverse_preorder(node.right, visit)
+
+    def traverse_inorder(node, visit):
+        if node:
+            self.traverse_inorder(node.left, visit)
+            visit(node.value)
+            self.traverse_inorder(node.right, visit)
+
+    def traverse_postorder(node, visit):
+        if node:
+            self.traverse_postorder(node.left, visit)
+            self.traverse_postorder(node.right, visit)
+            visit(node.value)
+
+    
+    def insert(self, value):
+        if self.root is None:
+            self.root = Node(value)
+        else:
+            self._insert(self.root, value)
+
+    def _insert(self, node, value):
+        queue = [node]
+        while queue:
+            current = queue.pop(0)
+            if not current.left:
+                current.left = Node(value)
+                break
+            else:
+                queue.append(current.left)
+            if not current.right:
+                current.right = Node(value)
+                break
+            else:
+                queue.append(current.right)
+
+```
