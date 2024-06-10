@@ -988,3 +988,32 @@ def lengthOfLongestSubstring(s):
 print(lengthOfLongestSubstring("abcabcbb"))
 print(lengthOfLongestSubstring("bbbbb"))
 print(lengthOfLongestSubstring("pwwkew"))
+
+'''
+A school is trying to take an annual photo of all the students. 
+The students are asked to stand in a single file line in non-decreasing order by height. 
+Let this ordering be represented by the integer array expected where expected[i] is the expected height of the ith student in line.
+
+You are given an integer array heights representing the current order that the students are standing in. 
+Each heights[i] is the height of the ith student in line (0-indexed).
+
+Return the number of indices where heights[i] != expected[i].
+'''
+
+def height_checker(heights):
+    expected = sorted(heights)
+    counter = 0
+
+    for i in range(len(heights)):
+        if heights[i] != expected[i]:
+            counter += 1
+    return counter
+
+print(height_checker([1, 1, 4, 2, 1, 3]))
+
+# better way to do this
+def heightChecker(heights):
+    expected = sorted(heights)
+    return sum(height_1 != height_2 for height_1, height_2 in zip(heights, expected))
+
+print(heightChecker([1, 1, 4, 2, 1, 3]))
