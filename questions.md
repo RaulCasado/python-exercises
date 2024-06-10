@@ -348,3 +348,30 @@ Esta sería el código base de como implementar un árbol binario en Python hay 
 
 ```
 
+# Qué es un generador en Python y como se crea
+
+Un generador en Python es una función especial que crea iteradores. Estos iteradores son eficientes ya que almacenan todos los valores en la memoria de una vez.
+
+Yield: En lugar de utilizar return para devolver un valor, los generadores usan yield. Cada vez que yield se encuentra, la función produce un valor y mantiene su estado.
+
+Iteradores: Los generadores son una forma de crear iteradores. Implementan los métodos __iter__() y __next__() automáticamente.
+
+Para crear un generador podemos usar la palabra reservada yield.
+
+```python
+def count_up_to(max):
+    count = 1
+    while count <= max:
+        yield count
+        count += 1
+
+counter = count_up_to(5)
+for num in counter:
+    print(num)
+```
+
+### Ventajas de los Generadores
+
+- Eficiencia de Memoria: Generan valores sobre la marcha y no almacenan toda la secuencia en la memoria.
+- Simplicidad: Son más simples y fáciles de escribir en comparación con las clases de iteradores.
+- Mantienen Estado: Mantienen su estado automáticamente entre llamadas a `yield`.
