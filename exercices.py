@@ -1017,3 +1017,63 @@ def heightChecker(heights):
     return sum(height_1 != height_2 for height_1, height_2 in zip(heights, expected))
 
 print(heightChecker([1, 1, 4, 2, 1, 3]))
+
+'''
+You are given two integers numBottles and numExchange.
+
+numBottles represents the number of full water bottles that you initially have. In one operation, you can perform one 
+of the following operations:
+
+    Drink any number of full water bottles turning them into empty bottles.
+    Exchange numExchange empty bottles with one full water bottle. Then, increase numExchange by one.
+
+Note that you cannot exchange multiple batches of empty bottles for the same value of numExchange. 
+For example, if numBottles == 3 and numExchange == 1, you cannot exchange 3 empty water bottles for 3 full bottles.
+
+Return the maximum number of water bottles you can drink.
+'''
+
+def max_bottles_drunk(num_bottles,num_exchange):
+    total_drunk = 0
+    empty_bottles = 0
+
+    while num_bottles > 0:
+        total_drunk += num_bottles
+        empty_bottles += num_bottles
+        num_bottles = 0
+
+        if empty_bottles >= num_exchange:
+            num_bottles += 1
+            empty_bottles -= num_exchange
+            num_exchange += 1
+        else:
+            break
+
+    return total_drunk
+
+print(max_bottles_drunk(10, 3))  
+print(max_bottles_drunk(13, 6))
+
+
+'''
+An array is considered special if every pair of its adjacent elements contains two numbers with different parity.
+
+You are given an array of integers nums. Return true if nums is a special array, otherwise, return false.
+'''
+def is_array_special(numbers):
+    for i in range(len(numbers)-1):
+        current_number_parity = numbers[i] % 2
+        next_number_parity = numbers[i+1] % 2
+
+        if current_number_parity == next_number_parity:
+            return False
+    
+    return True
+
+# other way to do this 
+def is_array_special(numbers):
+    return all(numbers[i] % 2 != numbers[i+1] % 2 for i in range(len(numbers) - 1))
+
+print(is_array_special([1, 2, 3, 4, 5]))   
+print(is_array_special([2, 4, 6, 8, 10]))
+
