@@ -376,8 +376,22 @@ for num in counter:
 - Simplicidad: Son más simples y fáciles de escribir en comparación con las clases de iteradores.
 - Mantienen Estado: Mantienen su estado automáticamente entre llamadas a `yield`.
 
-# Qué es un método estático.
+### Qué es un método estático
 
+Un método estático pertenece a una clase y puede ser llamado directamente desde la clase, es decir, no se necesita crear una instancia de la clase para poder llamar a un método estático. Estos métodos suelen tener en común la temática con la clase. Por ejemplo, si tenemos una clase `TaskController`, un método estático dentro de esta clase podría ser uno que gestione tareas.
+
+En Python, para definir que un método es estático se utiliza el decorador `@staticmethod`.
+
+```python
+class TaskController:
+    @staticmethod
+    def get_tasks():
+        # método que llame al modelo y acceda a las tareas de una base de datos
+        print("Llamando a las tareas desde la base de datos")
+    
+# Una vez hecho esto, podemos llamar al método get_tasks sin tener que crear una instancia 
+TaskController.get_tasks()
+```
 
 # Explica el concepto de __init__ y __new__.
 
