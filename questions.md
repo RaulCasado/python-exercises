@@ -375,3 +375,31 @@ for num in counter:
 - Eficiencia de Memoria: Generan valores sobre la marcha y no almacenan toda la secuencia en la memoria.
 - Simplicidad: Son más simples y fáciles de escribir en comparación con las clases de iteradores.
 - Mantienen Estado: Mantienen su estado automáticamente entre llamadas a `yield`.
+
+# Qué es un método estático.
+
+
+# Explica el concepto de __init__ y __new__.
+
+Los métodos init y new son dos métodos utilizados a la hora de crear un objeto, las diferencias entre ellos son:
+
+Empezemos por new este método es llamado antes que init ya que new se encarga de crear la instancia del objeto, una vez creada la instancia se llama a init que inicializará el objeto con los atributos. Otra diferencia es que new es un método estático mientras que init es un método de instancia. Al ser new llamado antes que init este método no tendrá como parámetro self ya que este todavía no ha sido creado.
+
+Normalmente no tendremos que sobrecargar el método new a no ser que estemos trabajando con clases como int, tuples o str.
+
+```python
+class MyClass:
+    def __new__(cls, *args, **kwargs):
+        print("Calling __new__")
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, value):
+        print("Calling __init__")
+        self.value = value
+
+# Creando una instancia de MyClass
+obj = MyClass(10)
+
+#Como hemos explicado new se ejecuta antes que init por lo que primero tendría que salir el print de new y después el de init.
+```
