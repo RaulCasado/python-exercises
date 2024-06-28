@@ -1077,3 +1077,48 @@ def is_array_special(numbers):
 print(is_array_special([1, 2, 3, 4, 5]))   
 print(is_array_special([2, 4, 6, 8, 10]))
 
+'''
+You are given two strings current and correct representing two 24-hour times.
+
+24-hour times are formatted as "HH:MM", where HH is between 00 and 23, and MM is between 00 and 59.
+ The earliest 24-hour time is 00:00, and the latest is 23:59.
+
+In one operation you can increase the time current by 1, 5, 15, or 60 minutes. 
+You can perform this operation any number of times.
+
+Return the minimum number of operations needed to convert current to correct.
+'''
+
+def convert_time(current:str,correct:str):
+    # map function could be used to simplify this operation
+    current_hours = int(current.split(":")[0])
+    current_minutes = int(current.split(":")[1])
+
+    correct_hours = int(correct.split(":")[0])
+    correct_minutes = int(correct.split(":")[1])
+
+    current_total_minutes =current_hours * 60 + current_minutes
+    correct_total_minutes = correct_hours * 60 + correct_minutes
+
+    difference = abs(current_total_minutes - correct_total_minutes)
+
+    min_operations = 0
+    
+    min_operations += difference // 60
+    difference %= 60
+    
+    min_operations += difference // 15
+    difference %= 15
+    
+    min_operations += difference // 5
+    difference %= 5
+    
+    min_operations += difference
+    
+    return min_operations
+
+print(convert_time("02:30", "04:35"))  # Output: 3
+print(convert_time("11:00", "11:01"))  # Output: 1
+
+
+
