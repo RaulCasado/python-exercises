@@ -417,3 +417,51 @@ obj = MyClass(10)
 
 #Como hemos explicado new se ejecuta antes que init por lo que primero tendría que salir el print de new y después el de init.
 ```
+
+# ¿Qué es la diferencia entre deepcopy y copy en Python?
+
+Copy es un módulo utilizado en Python para hacer copias de objetos, este tiene 2 tipos de copias las copias superficiales o (shallow copies) y las copias profundas o (deep copies). La diferencia entre ambas es como se maneja los objetos anidados del objeto que copiamos en caso de las copias superficiales no copiará los objetos anidados, en lugar de eso ambos objetos el copiado y original compartirán las referencias a los objetos contenidos.
+
+```python
+import copy
+
+original_list = [1, 2, [3, 4]]
+shallow_copy = copy.copy(original_list)
+
+shallow_copy[0] = 10
+print(original_list) 
+print(shallow_copy)   
+
+# Aquí sí que hará bien el print ya que no hemos modificado el objeto contenido.
+
+shallow_copy[2][0] = 30
+print(original_list) 
+print(shallow_copy)
+# En estos prints tanto el primero como el segundo van a imprimir lo mismo [1,2[30,4]] ya que como hemos visto comparten referencia al objeto contenido en este caso [3,4]
+```
+
+Mientras que las copias profundas si que copia los objetos anidados de forma recursiva haciendo que el objeto que hemos copiado y la copia sean dos objetos diferentes.
+
+```python
+import copy
+
+original_list = [1, 2, [3, 4]]
+deep_copy = copy.deepcopy(original_list)
+
+deep_copy[0] = 10
+print(original_list)  # [1, 2, [3, 4]]
+print(deep_copy)      # [10, 2, [3, 4]]
+
+deep_copy[2][0] = 30
+print(original_list)  # [1, 2, [3, 4]]
+print(deep_copy)      # [10, 2, [30, 4]]
+
+```
+
+# Explica qué es el "scope" de una variable y cómo se maneja en Python.
+
+# ¿Qué es el "Garbage Collection" en Python y cómo funciona?
+
+# ¿Qué es el principio de responsabilidad única (SRP) y por qué es importante?
+
+# ¿Qué es un entorno virtual en Python y por qué deberías usarlo?
