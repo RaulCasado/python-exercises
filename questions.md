@@ -460,6 +460,75 @@ print(deep_copy)      # [10, 2, [30, 4]]
 
 # Explica qué es el "scope" de una variable y cómo se maneja en Python.
 
+Primero definamos que es el scope o ámbito de una variable esto se refiere a la región de código donde la variable es reconocida y puede ser usada. Python maneja el scope de las variables utilizando unas reglas específicas, conocidas como LEGB.
+
+L: Local Scope (ámbito local): Está definido dentro de una función esta variable solo puede ser usada dentro de la función por ejemplo:
+
+```python
+def my_function():
+    local_var = 10 
+    print(local_var)
+
+my_function()
+print(local_var) # si hacemos este print dará un error ya que no reconocerá la variable ya que está definida dentro de la función.  
+
+```
+
+E : Enclosing Scope (Ámbito Envolvente): Se refiere a las variables en funciones anidadas. Una función interna puede acceder a las variables de su función externa.
+
+```python
+def outer_function():
+    outer_var = 20 
+
+    def inner_function():
+        print(outer_var)  # Este print sí funcionará
+
+    inner_function()
+
+outer_function()
+```
+
+G: Global Scope (Ámbito Global): Las variables definidas fuera de todas las funciones tienen un scope global y pueden ser accesibles desde cualquier lugar.
+
+```python
+global_var = 30 
+
+def my_function():
+    print(global_var)  # Accediendo a la variable global
+
+my_function()
+print(global_var)  # También accesible
+```
+
+B: Built-in Scope: Este es el scope que contiene nombres predefinidos por Python funciones como len() o print()
+
+```python
+print(len("Hello, World!"))
+```
+
+Y ¿para qué queremos saber esta regla? La idea es que Python a la hora de buscar una variable lo hará en el orden que lo hemos explicado, como se puede ver en este ejemplo.
+
+```python
+x = "global"
+
+def outer_function():
+    x = "enclosing"
+
+    def inner_function():
+        x = "local"
+        print(x)  # Imprime "local"
+
+    inner_function()
+    print(x)  # Imprime "enclosing"
+
+outer_function()
+print(x)  # Imprime "global"
+```
+
+El primer print imprime local ya que imprime la variable que está definida en inner_function, el segundo imprime enclosing ya que está en mayor orden de prioridad que global que también se llama x y finalmente el último print imprimirá global ya que las demás no son accesibles en este ámbito.
+
+También tenemos 2 palabras exclusivas para trabajar con el ámbito de las variables estas son global y nonlocal global sirve para inficarle a Python que queremos trabajar con la variable global, mientras que nonlocal sirve para el ámbito envolvente.
+
 # ¿Qué es el "Garbage Collection" en Python y cómo funciona?
 
 # ¿Qué es el principio de responsabilidad única (SRP) y por qué es importante?
