@@ -1139,3 +1139,29 @@ def find_final_value(nums, original):
         original *= 2
     return original
 
+'''
+You are given a string s, which contains stars *.
+
+In one operation, you can:
+
+    Choose a star in s.
+    Remove the closest non-star character to its left, as well as remove the star itself.
+
+Return the string after all stars have been removed.
+'''
+def remove_stars(s: str):
+    letters = []
+
+    for letter in s:
+        if letter == "*":
+            if letters:
+                letters.pop()
+        else:
+            letters.append(letter)
+
+    return ''.join(letters)
+
+print(remove_stars("leet**cod*e")) 
+print(remove_stars("erase*****")) 
+
+
