@@ -531,6 +531,42 @@ También tenemos 2 palabras exclusivas para trabajar con el ámbito de las varia
 
 # ¿Qué es el "Garbage Collection" en Python y cómo funciona?
 
+El Garbage Collection (recolección de basura) en Python es el proceso de gestión automática de la memoria este se encarga de liberar espacio de memoria ocupado por objetos que ya no son necesarios en el programa.
+
+Python usa una combinación de conteo de referencia y colector de basura generacional.
+
+Conteo de referencia: Basicamente Python tiene un contador de referencias. Cuando este contador llega a cero este objeto va a ser eliminado de memoria veamos un ejemplo.
+
+```python
+a = [1, 2, 3]  # El contador de referencias del objeto [1, 2, 3] es 1 ya que se acaba de crear 
+b = a          # El contador de referencias del objeto [1, 2, 3] será 2 
+del a          # El contador de referencias del objeto [1, 2, 3] es 1 ya que hemos borrado a
+b = None       # El contador de referencias del objeto [1, 2, 3] es 0, por lo que puede ser eliminado
+```
+
+También tenemos el colector de basuras generacional, veamos un ejemplo y lo explicaremos.
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+# Creamos dos objetos node y hacemos que se refieran entre ellos
+a = Node(1)
+b = Node(2)
+
+a.next = b
+b.next = a
+
+# Eliminamos las referencias originales.
+a = None
+b = None
+
+# En este punto, los objetos Node están referenciados entre sí pero si no son accesibles desde ninguna otra parte del programa Python detectará este ciclo y lo podrá llegar a eliminar 
+```
+Si queremos trabajar manualmente tenemos que importar gc con este módulo podemos habilitar, desabilitar, forzar una recolección y tener unas estadísticas de la recolección.
+
 # ¿Qué es el principio de responsabilidad única (SRP) y por qué es importante?
 
 # ¿Qué es un entorno virtual en Python y por qué deberías usarlo?
