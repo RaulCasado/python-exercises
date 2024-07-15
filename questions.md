@@ -607,4 +607,18 @@ Como vemos en el ejemplo hemos modificado la clase book para que tenga una respo
 
 # ¿Qué es un entorno virtual en Python y por qué deberías usarlo?
 
+Un entorno virtual es un espacio en el que puedes tener instaladas dependencias en un proyecto sin tener que interferir en las de otros proyectos o globales esto es especialmente útil ya que puede haber proyectos que tengan que usar una dependencia pero en distintas versiones. Otros beneficios son que nos permite tener una mayor facilidad a la hora de mantener las versiones ya que para cada proyecto tendremos versiones específicas, seguridad a lo mejor instalamos un paquete que interfiere con otro de nuestros proyectos, también podemos reproducir el código en otros sistemas asegurandanos que la configuración del nuevo sistema no interfiera.
+
+Para crear un entorno en Python, si desarrollamos con Visual Studio te preguntará si quieres crear un entorno podemos simplemente darle que sí o podemos hacerlo manualmente con consola.
+
+```bash
+python -m venv mi_entorno
+source mi_entorno/bin/activate
+pip install paquete
+pip freeze > requirements.txt
+deactivate
+```
+
+Creamos el entorno, lo activamos, instalamos las dependencias que necesitemos por ejemplo requests, pasamos las dependencias a un archivo requirements.txt y si queremos salirnos del entorno podemos hacerlo con deactivate.
+
 # Qué son los principios SOLID.
