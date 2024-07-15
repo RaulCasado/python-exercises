@@ -1193,3 +1193,26 @@ def k_beauty(num, k):
 num = 120
 k = 2
 print(k_beauty(num, k))
+
+def di_string_match(string):
+    string_len = len(string)
+    low = 0
+    high = string_len
+    perm = []
+
+    for letter in string:
+        if letter == "I":
+            perm.append(low)
+            low += 1
+        else:
+            perm.append(high)
+            high -= 1
+    perm.append(low)
+    return perm
+
+print(di_string_match("IDID"))
+print(di_string_match("III"))
+print(di_string_match("DDI"))
+
+
+    

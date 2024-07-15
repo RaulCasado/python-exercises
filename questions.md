@@ -622,3 +622,4 @@ deactivate
 Creamos el entorno, lo activamos, instalamos las dependencias que necesitemos por ejemplo requests, pasamos las dependencias a un archivo requirements.txt y si queremos salirnos del entorno podemos hacerlo con deactivate.
 
 # Qué son los principios SOLID.
+
