@@ -1164,4 +1164,32 @@ def remove_stars(s: str):
 print(remove_stars("leet**cod*e")) 
 print(remove_stars("erase*****")) 
 
+'''
+The k-beauty of an integer num is defined as the number of substrings of num when 
+it is read as a string that meet the following conditions:
 
+    It has a length of k.
+    It is a divisor of num.
+
+Given integers num and k, return the k-beauty of num.
+'''
+
+def k_beauty(num, k):
+    num_str = str(num)
+    n = len(num_str)
+    
+    k_beauty_count = 0
+
+    for i in range(n - k + 1):
+        substring = num_str[i:i + k]
+        
+        substring_num = int(substring)
+
+        if substring_num != 0 and num % substring_num == 0:
+            k_beauty_count += 1
+            
+    return k_beauty_count
+
+num = 120
+k = 2
+print(k_beauty(num, k))

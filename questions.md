@@ -569,4 +569,42 @@ Si queremos trabajar manualmente tenemos que importar gc con este módulo podemo
 
 # ¿Qué es el principio de responsabilidad única (SRP) y por qué es importante?
 
+Empecemos con la definición: Una clase debe tener solo una responsibilidad o propósito, esto también se puede extender a otros conceptos como las funciones. Esto hace que el código sea más mantenible ya que si por ejemplo tenemos una clase que trabaja con los strings de nuestra app por ejemplo para quitarle carácteres especiales, ponerlo todo minúsculas etc. Sabemos que si modificamos esta clase no cambiará en como los datos se añaden a la base de datos. Más legibilidad y entendimientos ya que nos es más fácil entender una función o clase que todo el código haga conceptos parecidos a tener todo el código mezclado y que haga de todo. Mayor reusabilidad en el ejemplo de los strings que he mencionado anteriormente se ve claramente este punto si no mezclamos lógica en esta clase tendremos una clase que podremos usar en otros proyectos. También se hará más fácil el tema de los tests, ya que al tener se pueden hacer pruebas únicas esperando que la función sólo hace lo que dice y no más funcionalidades. Ahora veremos un ejemplo en Python sobre este principio.
+
+```python
+class Book:
+    def __init__(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+
+    def save_to_database(self):
+        # Código para guardar el libro en la base de datos
+        # Verificar si el ISBN es un número con una cantidad de 10-13 dígitos
+        pass
+
+    # Con SRP
+    class Book:
+        def __init__(self, title, author, isbn):
+            self.title = title
+            self.author = author
+            self.isbn = isbn
+
+    class BookRepository:
+        def save_to_database(self, book):
+            # Código para guardar el libro en la base de datos
+            # Manejar la lógica de si es correcto el isbn
+            pass
+    
+    class DataTest:
+        def is_isbn_correct(self,isbn):
+            # Verificar si es correcto
+            pass
+
+```
+
+Como vemos en el ejemplo hemos modificado la clase book para que tenga una responsabilidad. La tarea de guardar en base de datos el libro tendría que ser de otra clase. También tenemos que la función de guardar en la base de datos revisa si el ISBN es correcto esto lo deberiamos de cambiar a otra función o en casos en los que tengamos varios datos a ver si están correctos o no podemos crearnos una clase para verificar si los datos se corresponden con lo que nosotros queremos.
+
 # ¿Qué es un entorno virtual en Python y por qué deberías usarlo?
+
+# Qué son los principios SOLID.
